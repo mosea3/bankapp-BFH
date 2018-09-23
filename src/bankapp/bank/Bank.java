@@ -149,6 +149,13 @@ public class Bank {
 		return true;
 	}
 
+	/**
+	 * finde angegebenes Konto in Bank
+	 * 
+	 * @param nr
+	 *            int
+	 * @return Account, Kontoobjekt
+	 */
 	public Account findAccount(int nr) {
 
 		for (int i = 0; i < this.accounts.size(); i++) {
