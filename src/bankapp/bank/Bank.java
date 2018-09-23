@@ -28,6 +28,15 @@ public class Bank {
 		return accounts;
 	}
 
+	/**
+	 * eröffnet ein Konto
+	 * 
+	 * @param pin
+	 *            - autorisierende neue PIN
+	 * @param balance
+	 *            - initialer Kontostand
+	 * @return int - neue Kontonummer
+	 */
 	public int openAccount(String pin, Double balance) {
 		int newAccountNumber = (this.accounts.size() + 1);
 
@@ -39,24 +48,103 @@ public class Bank {
 		return newAccountNumber;
 	}
 
-	public double getBalance() {
-		return this.accounts.get(lastAccountNr).getBalance();
+	/**
+	 * gibt Kontostand eines angegebenen Kontos zurück
+	 * 
+	 * @param AccountNr
+	 *            - int Kontonummer
+	 * @param pin
+	 *            - String autorisierende PIN
+	 * @return Double, Kontostand
+	 * @return null; maskierender Kontostand für nicht autorisiert
+	 * @return null, nicht existierendes Konto
+	 */
+	public Double getBalance(int AccountNr, String pin) {
+		Account ac = this.findAccount(AccountNr);
+
+		if (ac == null) {
+			return null; // TODO Aus Bankgeheimnisgründen alle
+							// Unautorisiert und
+							// nicht existent gleich ablehnen?
+		}
+		if (!ac.checkPIN(pin)) {
+			return null; // TODO throw UnauthorizedException
+		}
+		return ac.getBalance();
+
 	}
 
-	public boolean deposit(double amount) {
-		return this.accounts.get(lastAccountNr).deposit(amount);
-	}
+	/**
+	 * deponiert Betrag auf angegebenes Konto
+	 * 
+	 * @param AccountNr
+	 *            int Kontonummer
+	 * @param amount,
+	 *            double gültiger Betrag
+	 * @return boolean - wenn erfolgreich
+	 */
+	public boolean deposit(int AccountNr, double amount) {
+		if (amount <= 0) {
+			return false; // TODO hier wird nochmals validiert
+		}
+		Account ac = this.findAccount(AccountNr);
 
-	public boolean withdraw(double amount) {
-		return this.accounts.get(lastAccountNr).withdraw(amount);
-	}
-
-	public boolean closeAccount(int nr, String pin) {
-		Account ac = this.findAccount(nr);
-		if (ac.getBalance() > 0) {
+		if (ac == null) {
 			return false;
 		}
+
+		return ac.deposit(amount);
+	}
+
+	/**
+	 * hebt Betrag von angegebem Konto ab
+	 * 
+	 * @param AccountNr
+	 *            int, Kontonummer
+	 * @param pin
+	 * @param amount
+	 * @return
+	 */
+	public boolean withdraw(int AccountNr, String pin, double amount) {
+		Account ac = this.findAccount(AccountNr);
+
+		if (ac == null) {
+			return false;
+		}
+		if (!ac.checkPIN(pin)) {
+			return false; // TODO throw UnauthorizedException
+		} // TODO Autorisierungsprozess in eigene Methode auslagern?
+
+		return ac.withdraw(amount);
+	}
+
+	/**
+	 * saldiert ein angegebenes Konto
+	 * 
+	 * @param nr
+	 *            - Kontonummber
+	 * @param pin
+	 *            - PIN
+	 * @return boolean, ob saldiert und entfernt
+	 */
+	public boolean closeAccount(int nr, String pin) {
+		Account ac = this.findAccount(nr);
+		if (ac == null) {
+			return false;
+		}
+
+		// PIN-Autorisierung
+		if (!ac.checkPIN(pin)) {
+			return false;
+		}
+
+		// Saldierung nur bei Kontostand 0, kein Guthaben oder Schuld vorhanden
+		if (ac.getBalance() == 0.0) {
+			return false;
+		}
+
 		this.accounts.remove(this.lastAccountNr);
+		ac = null;
 
 		return true;
 	}
@@ -69,7 +157,7 @@ public class Bank {
 				return this.accounts.get(i);
 			}
 		}
-		return null; // @TODO: throw noAccountFoundException
+		return null; // TODO: throw noAccountFoundException
 	}
 
 }

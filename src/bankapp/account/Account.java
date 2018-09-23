@@ -16,6 +16,16 @@ public class Account {
 	private String pin;
 	private double balance;
 
+	/**
+	 * Konstruktor - eröffnet ein Konto
+	 * 
+	 * @param nr
+	 *            - Kontonummer
+	 * @param pin
+	 *            - PIN
+	 * @param balance
+	 *            - initialer Kontostand
+	 */
 	public Account(int nr, String pin, double balance) {
 		super();
 		this.nr = nr;
@@ -23,6 +33,12 @@ public class Account {
 		this.balance = balance;
 	}
 
+	/**
+	 * Konstruktor für Kontoeröffnung, Kontostand 0.00
+	 * 
+	 * @param nr
+	 * @param pin
+	 */
 	public Account(int nr, String pin) {
 		this(nr, pin, 0.0);
 	}
@@ -82,6 +98,7 @@ public class Account {
 	 * überprüft PIN
 	 * 
 	 * @param pin
+	 *            - die verifizierende PIN
 	 * @return boolean, ob verfiziert
 	 */
 	public boolean checkPIN(String pin) {
