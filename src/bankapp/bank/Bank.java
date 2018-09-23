@@ -143,7 +143,7 @@ public class Bank {
 			return false;
 		}
 
-		this.accounts.remove(this.lastAccountNr);
+		this.accounts.remove(ac);
 		ac = null;
 
 		return true;
@@ -158,12 +158,12 @@ public class Bank {
 	 */
 	public Account findAccount(int nr) {
 
-		for (int i = 0; i < this.accounts.size(); i++) {
-			if (this.accounts.get(i).getNr() == nr) {
-				this.lastAccountNr = i;
-				return this.accounts.get(i);
+		for (Account ac : this.accounts) {
+			if (ac.getNr() == nr) {
+				return ac;
 			}
 		}
+
 		return null; // TODO: throw noAccountFoundException
 	}
 
