@@ -4,13 +4,18 @@
 package bankapp.account;
 
 /**
- * Account Klasse
- * hält grundlegende Kontoinformationen
+ * Account Klasse hält grundlegende Kontoinformationen
+ * 
  * @author andy.moser
  *
  */
 
 public class Account {
+
+	private int nr;
+	private String pin;
+	private double balance;
+
 	public Account(int nr, String pin, double balance) {
 		super();
 		this.nr = nr;
@@ -18,20 +23,22 @@ public class Account {
 		this.balance = balance;
 	}
 
-	private int nr;
-	private String pin;
-	private double balance; 
+	public Account(int nr, String pin) {
+		this(nr, pin, 0.0);
+	}
 
 	/**
 	 * Gibt die Kontonummer des Kontenobjekt zurück
+	 * 
 	 * @return int Kontonummer
 	 */
 	public int getNr() {
 		return this.nr;
 	}
-	
+
 	/**
 	 * gibt den momentanen Kontostand zurück
+	 * 
 	 * @return double Kontostant
 	 */
 	public double getBalance() {
@@ -40,7 +47,9 @@ public class Account {
 
 	/**
 	 * Deponiert angegebenen Betrag aufs Konto
-	 * @param amount - Double, Betrag
+	 * 
+	 * @param amount
+	 *            - Double, Betrag
 	 * @return boolean - gibt Erfolgsmeldung zurück
 	 * 
 	 */
@@ -54,7 +63,9 @@ public class Account {
 
 	/**
 	 * hebt angegebenen Betrag vom Konto ab
-	 * @param amount double, abzuhebender Betrag
+	 * 
+	 * @param amount
+	 *            double, abzuhebender Betrag
 	 * @return boolean, ob erfolgreich
 	 */
 	public boolean withdraw(double amount) {
@@ -69,6 +80,7 @@ public class Account {
 
 	/**
 	 * überprüft PIN
+	 * 
 	 * @param pin
 	 * @return boolean, ob verfiziert
 	 */
