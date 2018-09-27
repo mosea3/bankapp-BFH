@@ -88,7 +88,7 @@ public class Bank {
 	 *            double gültiger Betrag
 	 * @return boolean - wenn erfolgreich
 	 */
-	public boolean deposit(int AccountNr, double amount) {
+	public boolean deposit(int AccountNr, Double amount) {
 		if (amount <= 0) {
 			return false; // TODO hier wird nochmals validiert
 		}
@@ -110,7 +110,7 @@ public class Bank {
 	 * @param amount
 	 * @return
 	 */
-	public boolean withdraw(int AccountNr, String pin, double amount) {
+	public boolean withdraw(int AccountNr, String pin, Double amount) {
 		Account ac = this.findAccount(AccountNr);
 
 		if (ac == null) {
