@@ -15,8 +15,13 @@ import bankapp.account.Account;
  *
  */
 public class Bank {
-	// Der Index des letzten Account in der Liste
+	/**
+	 * Nummer des letztverwendeten Kontos
+	 */
 	private int lastAccountNr;
+	/**
+	 * Liste der Konti
+	 */
 	List<Account> accounts = new ArrayList<>();
 
 	/**
@@ -156,10 +161,11 @@ public class Bank {
 	 *            int
 	 * @return Account, Kontoobjekt
 	 */
-	public Account findAccount(int nr) {
+	private Account findAccount(int nr) {
 
 		for (Account ac : this.accounts) {
 			if (ac.getNr() == nr) {
+				this.lastAccountNr = ac.getNr();
 				return ac;
 			}
 		}
