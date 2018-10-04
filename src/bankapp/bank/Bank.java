@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bankapp.account.Account;
+import bankapp.account.PersonalAccount;
 
 /**
  * Aufgabe 2 - Bank. Bildet die Bankklasse als Manager der Accounts
@@ -19,10 +20,15 @@ public class Bank {
 	 * Nummer des letztverwendeten Kontos
 	 */
 	private int lastAccountNr;
+
 	/**
 	 * Liste der Konti
 	 */
 	List<Account> accounts = new ArrayList<>();
+
+	public static char PERSONAL_ACCOUNT = 'P';
+
+	public static char SAVINGS_ACCOUNT = 'S';
 
 	/**
 	 * gibt alle Konti zurück
@@ -45,12 +51,16 @@ public class Bank {
 	public int openAccount(String pin, Double balance) {
 		int newAccountNumber = (this.accounts.size() + 1);
 
-		Account acc = new Account(newAccountNumber, pin, balance);
+		Account acc = new PersonalAccount(newAccountNumber, pin, balance);
 		this.lastAccountNr = accounts.size();
 
 		accounts.add(acc);
 
 		return newAccountNumber;
+	}
+
+	public int openAccount(String pin, Double balance, ACCOUNT_TYPE){
+		
 	}
 
 	/**

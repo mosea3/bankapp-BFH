@@ -1,6 +1,3 @@
-/**
- * 
- */
 package bankapp.account;
 
 /**
@@ -10,11 +7,11 @@ package bankapp.account;
  *
  */
 
-public class Account {
+public abstract class Account {
 
 	private int nr;
 	private String pin;
-	private double balance;
+	protected Double balance;
 
 	/**
 	 * Konstruktor - eröffnet ein Konto
