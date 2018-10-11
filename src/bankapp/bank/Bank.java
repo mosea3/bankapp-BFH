@@ -8,6 +8,7 @@ import java.util.List;
 
 import bankapp.account.Account;
 import bankapp.account.PersonalAccount;
+import bankapp.account.SavingsAccount;
 
 /**
  * Aufgabe 2 - Bank. Bildet die Bankklasse als Manager der Accounts
@@ -59,8 +60,21 @@ public class Bank {
 		return newAccountNumber;
 	}
 
-	public int openAccount(String pin, Double balance, ACCOUNT_TYPE){
-		
+	public int openAccount(String pin, Double balance, String ACCOUNT_TYPE) {
+		int newAccountNumber = (this.accounts.size() + 1);
+		Account acc;
+
+		if (ACCOUNT_TYPE == "P") {
+			acc = new PersonalAccount(newAccountNumber, pin, balance);
+			accounts.add(acc);
+		} else {
+			acc = new SavingsAccount(newAccountNumber, pin, balance);
+			accounts.add(acc);
+		}
+
+		this.lastAccountNr = accounts.size();
+
+		return newAccountNumber;
 	}
 
 	/**

@@ -7,4 +7,8 @@ public class PersonalAccount extends Account {
 		// TODO Auto-generated constructor stub
 	}
 
+	public PersonalAccount(int nr, String pin, Double balance) {
+		super(nr, pin, balance);
+	}
+
 }

@@ -23,7 +23,7 @@ public abstract class Account {
 	 * @param balance
 	 *            - initialer Kontostand
 	 */
-	public Account(int nr, String pin, double balance) {
+	public Account(int nr, String pin, Double balance) {
 		super();
 		this.nr = nr;
 		this.pin = pin;

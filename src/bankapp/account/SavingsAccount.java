@@ -2,7 +2,7 @@ package bankapp.account;
 
 public class SavingsAccount extends Account {
 
-	private static final int WITHDRAW_LIMIT = 10000;
+	static final int WITHDRAW_LIMIT = 10000;
 
 	public SavingsAccount(int nr, String pin) {
 		super(nr, pin);
@@ -21,9 +21,12 @@ public class SavingsAccount extends Account {
 	 *            double, abzuhebender Betrag
 	 * @return boolean, ob erfolgreich
 	 */
-	public boolean withdraw(double amount) {
-
+	public boolean withdraw(Double amount) {
 		if (amount < 0) {
+			return false;
+		}
+
+		if (amount > this.WITHDRAW_LIMIT) {
 			return false;
 		}
 
